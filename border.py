@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 BLUE = [255, 0, 0]
 img2 = cv.imread('001.jpg')
-img1 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)
+img1 = cv.cvtColor(img2, cv.COLOR_BGR2RGB)  # BGR改RGB
 replicate = cv.copyMakeBorder(img1, 10, 10, 10, 10, cv.BORDER_REPLICATE)
 reflect = cv.copyMakeBorder(img1, 10, 10, 10, 10, cv.BORDER_REFLECT)
 reflect101 = cv.copyMakeBorder(img1, 10, 10, 10, 10, cv.BORDER_REFLECT_101)
