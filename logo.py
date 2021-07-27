@@ -1,6 +1,7 @@
 import cv2 as cv
 img1 = cv.imread('test1.jpg')
-img2 = cv.imread('LOGO.jpg')
+img3 = cv.imread('LOGO.jpg')
+img2 = cv.resize(img3, (256, 256), interpolation=cv.INTER_AREA)
 # 我想在左上角放置一个logo，所以我创建了一个 ROI,并且这个ROI的宽和高为我想放置的logo的宽和高
 rows, cols, channels = img2.shape
 roi = img1[0:rows, 0:cols]
@@ -16,5 +17,6 @@ img2_fg = cv.bitwise_and(img2, img2, mask=mask)
 dst = cv.add(img1_bg, img2_fg)
 img1[0:rows, 0:cols] = dst
 cv.imshow('res', img1)
+cv.imshow("01", mask)
 cv.waitKey(0)
 cv.destroyAllWindows()
