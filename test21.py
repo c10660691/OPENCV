@@ -19,7 +19,6 @@ newcountours = []
 for contour in contours:
     if cv2.contourArea(contour) > 2000 and cv2.arcLength(contour, True) < 7000:
         newcountours.append(contour)
-# cv2.drawContours(img,contours,-1,(0,255,0),2)
 print(len(contours), len(newcountours))
 for a in newcountours:
     print(cv2.arcLength(a, True), cv2.contourArea(a))
@@ -29,9 +28,6 @@ for a in newcountours:
     cv2.circle(img, center, radius, (0, 255, 0), 2)
     x, y, w, h = cv2.boundingRect(a)
     cv2.rectangle(img, (x, y), (x+w, y+h), (255, 255, 0), 2)
-
-# print(cv2.moments(contours[100]))
-# print(cv2.contourArea(contours[100]))
 cv2.imshow('image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
