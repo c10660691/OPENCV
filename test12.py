@@ -4,8 +4,8 @@ from matplotlib import pyplot as plt
 
 img = cv.imread('001.jpg', 0)
 scharrx = cv.Scharr(img, cv.CV_8U, 1, 0)
-scharry = cv.Scharr(img, cv.CV_8U, 0, 1)
-scharr = cv.Scharr(img, cv.CV_8U, 0, 1)
+scharry = cv.Scharr(img, cv.CV_64F, 0, 1)
+scharr = cv.Scharr(img, cv.CV_64F, 0, 1)
 
 cv.imshow('img', img)
 cv.imshow('scharrx', scharrx)
