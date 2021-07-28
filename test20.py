@@ -16,14 +16,14 @@ contours, hi = cv2.findContours(edges1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 img1 = edges1
 newcountours = []
 for contour in contours:
-    if cv2.contourArea(contour) > 2000 and cv2.arcLength(contour, True) < 2000:
+    if cv2.contourArea(contour) > 200 and cv2.arcLength(contour, True) < 2000:
         newcountours.append(contour)
 cv2.drawContours(img, newcountours, -1, (0, 255, 0), 2)
 print(len(contours), len(newcountours))
 for a in newcountours:
     print(cv2.arcLength(a, True), cv2.contourArea(a))
-print(cv2.moments(contours[100]))
-print(cv2.contourArea(contours[100]))
+# print(cv2.moments(contours[100]))
+# print(cv2.contourArea(contours[100]))
 cv2.imshow('image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
