@@ -4,20 +4,9 @@ import math
 
 
 class HandDetector:
-    """
-    Finds Hands using the mediapipe library. Exports the landmarks
-    in pixel format. Adds extra functionalities like finding how
-    many fingers are up or the distance between two fingers. Also
-    provides bounding box info of the hand found.
-    """
 
     def __init__(self, mode=False, maxHands=2, detectionCon=0.5, minTrackCon=0.5):
-        """
-        :param mode: In static mode, detection is done on each image: slower
-        :param maxHands: Maximum number of hands to detect
-        :param detectionCon: Minimum Detection Confidence Threshold
-        :param minTrackCon: Minimum Tracking Confidence Threshold
-        """
+
         self.mode = mode
         self.maxHands = maxHands
         self.detectionCon = detectionCon
@@ -31,12 +20,7 @@ class HandDetector:
         self.lmList = []
 
     def findHands(self, img, draw=True):
-        """
-        Finds hands in a BGR image.
-        :param img: Image to find the hands in.
-        :param draw: Flag to draw the output on the image.
-        :return: Image with or without drawings
-        """
+
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.hands.process(imgRGB)
 
@@ -53,14 +37,6 @@ class HandDetector:
     def findPosition(self, img, handNo=0, draw=False):
 
     def findPosition(self, img, handNo=0, draw=True):
-        """
-        Finds landmarks of a single hand and puts them in a list
-        in pixel format. Also finds the bounding box around the hand.
-        :param img: main image to find hand in
-        :param handNo: hand id if more than one hand detected
-        :param draw: Flag to draw the output on the image.
-        :return: list of landmarks in pixel format; bounding box
-        """
         xList = []
         yList = []
         bbox = []
@@ -93,11 +69,7 @@ class HandDetector:
         return self.lmList, bboxInfo
 
     def fingersUp(self):
-        """
-        Finds how many fingers are open and returns in a list.
-        Considers left and right hands separately
-        :return: List of which fingers are up
-        """
+
         if self.results.multi_hand_landmarks:
             myHandType=self.handType()
             fingers=[]
@@ -120,17 +92,7 @@ class HandDetector:
                     fingers.append(0)
         return fingers
     def findDistance(self, p1, p2, img, draw = True):
-        """
-        Find the distance between two landmarks based on their
-        index numbers.
-        :param p1: Point1 - Index of Landmark 1.
-        :param p2: Point2 - Index of Landmark 2.
-        :param img: Image to draw on.
-        :param draw: Flag to draw the output on the image.
-        :return: Distance between the points
-                 Image with output drawn
-                 Line information
-        """
+
         if self.results.multi_hand_landmarks:
             x1, y1=self.lmList[p1][0], self.lmList[p1][1]
             x2, y2=self.lmList[p2][0], self.lmList[p2][1]
@@ -143,10 +105,7 @@ class HandDetector:
             length=math.hypot(x2 - x1, y2 - y1)
             return length, img, [x1, y1, x2, y2, cx, cy]
     def handType(self):
-        """
-        Checks if the hand is left or right
-        :return: "Right" or "Left"
-        """
+
         if self.results.multi_hand_landmarks:
             if self.lmList[17][0] < self.lmList[5][0]:
                 return "Right"
