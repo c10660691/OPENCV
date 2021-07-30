@@ -1,4 +1,4 @@
-from hand import HandDetector
+from 手掌 import HandDetector
 import cv2
 
 cap = cv2.VideoCapture(1)
